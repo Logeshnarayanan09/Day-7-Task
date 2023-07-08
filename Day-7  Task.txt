@@ -1,0 +1,163 @@
+                              //Asia continent countries//
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        var xhr = new XMLHttpRequest();
+        var url ="https://restcountries.com/v3.1/all";
+        var method = "GET";
+        xhr.open(method,url);
+        xhr.onload = function(){
+            if(xhr.status === 200){
+                var country = JSON.parse(xhr.responseText);
+                var result = country.filter((e) => e.region === "Asia");
+                console.log(result);
+            } else{
+                console.log("Request failed", xhr.status);
+            }
+        }
+        xhr.send();
+    </script>
+</body>
+</html>
+
+                           //Countries Population Lessthan 200000//
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        var xhr = new XMLHttpRequest();
+        var url ="https://restcountries.com/v3.1/all";
+        var method = "GET";
+        xhr.open(method,url);
+        xhr.onload = function(){
+            if(xhr.status === 200){
+                var country = JSON.parse(xhr.responseText);
+                var result = country.filter((e) => e.population<200000);
+                var name = result.map((e) => e.name.common);
+                console.log(result,name);
+            } else {
+                console.log("Request failed", xhr.status);
+            }
+        }
+        xhr.send();
+    </script>
+</body>
+</html>
+
+
+                             //Country Name, Flag, Capital//
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        var xhr = new XMLHttpRequest();
+        var url ="https://restcountries.com/v3.1/all";
+        var method = "GET";
+        xhr.open(method,url);
+        xhr.onload = function(){
+            if(xhr.status === 200){
+                var country = JSON.parse(xhr.responseText);
+                country.forEach(element => {
+                    console.log("The country name is:", element.name.common);
+                    console.log("Country Flag is:", element.flag);
+                    console.log("Capital of the country is:", element.capital);
+                });
+                 } else{
+                console.log("Request failed", xhr.status)
+            }
+        }
+        xhr.send();
+    </script>
+</body>
+</html>
+
+
+                               //Total Population of the countries//
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        var xhr = new XMLHttpRequest();
+        var url ="https://restcountries.com/v3.1/all";
+        var method = "GET";
+        xhr.open(method,url);
+        xhr.onload = function(){
+            if(xhr.status === 200){
+                var country = JSON.parse(xhr.responseText);
+                var result = country.reduce((acc, val) => acc+val.population,0);
+                console.log("The total country population is:",result);
+            } else{
+                console.log("Request failed", xhr.status)
+            }
+        }
+        xhr.send();
+    </script>
+</body>
+</html>
+
+
+                          //US Dollars currencies using countries//
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        var xhr = new XMLHttpRequest();
+        var url ="https://restcountries.com/v3.1/all";
+        var method = "GET";
+        xhr.open(method,url);
+        xhr.onload = function(){
+            if(xhr.status === 200){
+                var country = JSON.parse(xhr.responseText);
+                for(var i=0; i<country.length; i++){
+                    if(country[i].currencies != undefined){
+                        Object.keys(country[i].currencies).forEach((key) => {
+                            if(key === "USD"){
+                                console.log(country[i].name.common,country[i].currencies[key]);
+                            }
+                        })
+                    }
+                }
+            } else{
+                console.log("Request failed", xhr.status);
+            }
+        }
+        xhr.send();
+    </script>
+</body>
+</html>
+ 
